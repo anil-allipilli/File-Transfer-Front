@@ -1,0 +1,25 @@
+.NavBar {
+  position: absolute;
+  top: 0;
+  margin-top: 20px;
+}
+.Logo {
+  position: relative;
+  left: 0;
+  display: inline;
+  padding-left: 75px;
+}
+.Links {
+  position: relative;
+  left: 1200px;
+  display: inline;
+}
+
+.Link {
+  padding-right: 75px;
+  text-decoration: none;
+  color: black;
+}
+.Link:hover {
+  text-decoration: underline;
+}

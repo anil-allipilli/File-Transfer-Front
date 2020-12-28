@@ -1,25 +1,25 @@
-.LoginBox {
+.RegisterSponseeBox {
+  margin-top: 100px;
   display: grid;
-  grid-template-rows: 75px 75px 75px;
-  margin-top: 30vh;
 }
-.InputUnit {
-  /* grid-row-start: 2;
-    grid-row-end: 3; */
+.RegisterUnit {
   display: grid;
   grid-template-columns: 200px 500px auto 75px;
+  height: 70px;
 }
-.Label {
+.RegisterLabel {
   grid-column-start: 2;
   grid-column-end: 3;
   margin: auto;
+  position: relative;
+  left: 0;
 }
-.Input {
+.RegisterInput {
   grid-column-start: 3;
   grid-column-end: 4;
   padding-left: 50px;
 }
-.LoginButton {
+.RegisterButton {
   width: 400px;
   margin: 10px auto;
 }

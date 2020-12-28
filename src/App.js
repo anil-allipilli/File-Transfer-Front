@@ -5,14 +5,18 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import Login from "./components/Login"
+import Navbar from "./components/Navbar"
+import Register from "./components/Register"
 
 function App() {
   return (
     <Router>
-      <Navbar />
+        <Navbar />
       <div className="App">        
         <Switch>
-
+        <Route path="/login"><Login/></Route>
+          <Route path="/register"><Register/></Route>
           <Route path="/"><Login/></Route>
         </Switch>
       </div>
