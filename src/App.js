@@ -9,6 +9,7 @@ import Login from "./components/Login"
 import Navbar from "./components/Navbar"
 import Register from "./components/Register"
 import ProductCreate from "./components/ProductCreate"
+import ProductDetail from "./components/ProductDetail"
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
         <Switch>
           <Route path="/login"><Login /></Route>
           <Route path="/register"><Register /></Route>
-          <Route path="/productcreate"><ProductCreate /></Route>
+          <Route path="/productcreate" component={ProductCreate}></Route>
+          <Route path="/productdetail/:id" component={ProductDetail}></Route>
+
           <Route path="/"><Login /></Route>
         </Switch>
       </div>

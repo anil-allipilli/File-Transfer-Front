@@ -1,0 +1,39 @@
+.ProductDetailBox {
+  display: grid;
+  grid-template-rows: 50px 50px auto auto;
+  margin-top: 10vh;
+}
+.InputUnit {
+  /* grid-row-start: 2;
+          grid-row-end: 3; */
+  display: grid;
+  grid-template-columns: 200px 500px auto 75px;
+}
+.TableUnit {
+  /* grid-row-start: 2;
+          grid-row-end: 3; */
+  display: grid;
+  /* grid-template-columns: 75px auto 75px; */
+}
+.TableRow {
+  /* grid-row-start: 2;
+      grid-row-end: 3; */
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  font-weight: normal;
+  cursor: pointer;
+}
+.Label {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin: auto;
+}
+.Input {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  padding-left: 50px;
+}
+.UploadButton {
+  width: 400px;
+  margin: 10px auto;
+}

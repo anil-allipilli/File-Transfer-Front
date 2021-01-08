@@ -13,6 +13,14 @@ class ProductCreate extends React.Component {
             selectedUsersList: [],
             filesList: ""
         }
+
+
+        this.history = this.props.history
+
+
+
+
+        // this.history = useHistory();
         this.filesUploadHandler = this.filesUploadHandler.bind(this);
     }
     async componentDidMount() {
@@ -60,42 +68,38 @@ class ProductCreate extends React.Component {
 
         let res;
         try {
+            let token = localStorage.getItem("access")
             // eslint-disable-next-line
             res = await api({
                 method: "post",
                 url: "createproduct/",
                 data: fileShareData,
-                headers: { 'Content-Type': 'multipart/form-data' }
+                headers: { 'Content-Type': 'multipart/form-data', 'Authorization': `Bearer ${token}` }
             })
         } catch (err) {
             console.log(err)
         }
-        console.log(res)
+        // console.log(history)
+        console.log(res.data)
+        this.history.replace(`/productdetail/${res.data.id}`);
     }
     removeOrAdd(userEmail) {
-
-
         if (this.state.selectedUsersList.includes(userEmail)) {
-
-            this.setState({ ...this.state, selectedUsersList: this.state.selectedUsersList.filter(email => email !== userEmail) })
-
-
+            this.setState({
+                ...this.state,
+                selectedUsersList: this.state.selectedUsersList.filter(email => email !== userEmail)
+            })
         }
-
         else {
-
             this.setState({
                 ...this.state,
                 selectedUsersList: this.state.selectedUsersList.concat(userEmail)
             })
-
-
         }
-
-
     }
 
     render() {
+
         return (
             <form className="ProductUploadBox" onSubmit={this.filesUploadHandler}>
                 <label className="InputUnit" >
