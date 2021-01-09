@@ -25,7 +25,7 @@ const Login = (props) => {
             })
             localStorage.setItem('access', res.data.access);
             localStorage.setItem('refresh', res.data.refresh);
-            history.push("/productcreate")
+            history.push("/dashboard")
 
 
         } catch (err) {
