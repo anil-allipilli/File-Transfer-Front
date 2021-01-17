@@ -23,8 +23,9 @@ const Login = (props) => {
                 data: loginFormData,
                 headers: { 'Content-Type': 'multipart/form-data' }
             })
-            localStorage.setItem('access', res.data.access);
-            localStorage.setItem('refresh', res.data.refresh);
+            window.localStorage.clear();
+            window.localStorage.setItem('access', res.data.access);
+            window.localStorage.setItem('refresh', res.data.refresh);
             history.push("/dashboard")
 
 

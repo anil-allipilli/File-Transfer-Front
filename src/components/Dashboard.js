@@ -1,6 +1,8 @@
 import React from 'react'
 
+
 import api from "../axios"
+
 
 import "../style/Dashboard.css"
 
@@ -11,9 +13,10 @@ class Dashboard extends React.Component {
             sharedproducts: [],
             myproducts: []
         }
-        this.history = this.props.history
     }
+
     async componentDidMount() {
+
         try {
             let token = localStorage.getItem("access")
             // eslint-disable-next-line
@@ -69,16 +72,14 @@ class Dashboard extends React.Component {
     }
 
     render() {
-
-
         return (
             <div className="DashBoardBox">
                 <div className="Tab">
                     <h1 className="Title">My Products</h1>
                     {this.state.myproducts.map((product, i) => {
                         return (
-                            <div className="Product">
-                                <div onClick={() => this.history.replace(`/productdetail/${product.id}`)}>{product.name}</div>
+                            <div key={i} className="Product">
+                                <div onClick={() => this.props.history.push(`/productdetail/${product.id}`)}>{product.name}</div>
                             </div>
                         )
                     })}
@@ -87,17 +88,16 @@ class Dashboard extends React.Component {
                     <h1 className="Title">Shared Products</h1>
                     {this.state.sharedproducts.map((product, i) => {
                         return (
-                            <div className="Product">
-                                <div onClick={() => this.history.replace(`/productdetail/${product.id}`)}>{product.name}</div>
+                            <div key={i} className="Product">
+                                <div onClick={() => this.props.history.push(`/productdetail/${product.id}`)}>{product.name}</div>
                             </div>
                         )
                     })}
                 </div>
-
-
             </div>
         )
     }
 }
 
 export default Dashboard
+

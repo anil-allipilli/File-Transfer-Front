@@ -13,13 +13,7 @@ class ProductCreate extends React.Component {
             selectedUsersList: [],
             filesList: ""
         }
-
-
         this.history = this.props.history
-
-
-
-
         // this.history = useHistory();
         this.filesUploadHandler = this.filesUploadHandler.bind(this);
     }
