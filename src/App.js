@@ -65,7 +65,7 @@ function App() {
           </Route>
 
           <Route path="/" >
-            {!authenticated ? <Redirect to="/login" /> : <Dashboard />}
+            {!authenticated ? <Redirect to="/login" /> : <Redirect to="/dashboard" />}
           </Route>
         </Switch>
       </div>

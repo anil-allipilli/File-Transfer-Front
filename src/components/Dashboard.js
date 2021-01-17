@@ -13,6 +13,7 @@ class Dashboard extends React.Component {
             sharedproducts: [],
             myproducts: []
         }
+
     }
 
     async componentDidMount() {
@@ -93,6 +94,10 @@ class Dashboard extends React.Component {
                             </div>
                         )
                     })}
+                </div>
+                <div className="Tab">
+                    <h1 className="AddButton">Add Product</h1>
+
                 </div>
             </div>
         )
