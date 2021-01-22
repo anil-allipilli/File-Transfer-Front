@@ -2,6 +2,7 @@ import React from 'react'
 import api from "../axios"
 
 import "../style/ProductCreate.css"
+import refreshToken from "../refreshToken"
 
 class ProductCreate extends React.Component {
 
@@ -14,10 +15,10 @@ class ProductCreate extends React.Component {
             filesList: ""
         }
         this.history = this.props.history
-        // this.history = useHistory();
         this.filesUploadHandler = this.filesUploadHandler.bind(this);
     }
-    async componentDidMount() {
+
+    async getUsersList() {
         try {
             let token = localStorage.getItem("access")
             // eslint-disable-next-line
@@ -25,7 +26,6 @@ class ProductCreate extends React.Component {
                 "accounts/",
                 { headers: { 'Authorization': `Bearer ${token}` } }
             )
-            console.log(res)
             this.setState(state => {
                 return {
                     ...state,
@@ -33,18 +33,20 @@ class ProductCreate extends React.Component {
                 }
             })
         } catch (err) {
-            console.log(err)
-            // if(err.response.status === 401) {
-            //     let refresh = await refreshToken()
-            //     if(!refresh) {
-            //         history.push("/login")
-            //     } else {
-            //         fetchdata()
-            //     }
-            // }
+
+            if (err.response.status === 401) {
+                let refresh = await refreshToken()
+                if (!refresh) {
+                    this.history.push("/login")
+                } else {
+                    this.getUsersList()
+                }
+            }
         }
+    }
 
-
+    async componentDidMount() {
+        this.getUsersList()
     }
 
 
@@ -73,8 +75,7 @@ class ProductCreate extends React.Component {
         } catch (err) {
             console.log(err)
         }
-        // console.log(history)
-        console.log(res.data)
+
         this.history.replace(`/productdetail/${res.data.id}`);
     }
     removeOrAdd(userEmail) {

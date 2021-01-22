@@ -1,6 +1,6 @@
 .LoginBox {
   display: grid;
-  grid-template-rows: 75px 75px 75px;
+  grid-template-rows: 75px 75px 75px 75px;
   margin-top: 30vh;
 }
 .InputUnit {
@@ -18,6 +18,10 @@
   grid-column-start: 3;
   grid-column-end: 4;
   padding-left: 50px;
+}
+.ErrorMessage {
+  margin: 0px auto;
+  color: rgba(255, 0, 0, 0.664);
 }
 .LoginButton {
   width: 400px;

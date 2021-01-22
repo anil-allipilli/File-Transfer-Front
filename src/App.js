@@ -7,7 +7,7 @@ import {
   Redirect
 
 } from "react-router-dom";
-import { createBrowserHistory } from 'history';
+
 import Login from "./components/Login"
 import Navbar from "./components/Navbar"
 import Register from "./components/Register"
@@ -16,7 +16,7 @@ import ProductDetail from "./components/ProductDetail"
 import Dashboard from "./components/Dashboard"
 
 function App() {
-  const history = createBrowserHistory();
+
   const checkLoginStatus = () => {
     const token = window.localStorage.getItem("access")
     if (token === null) return false
@@ -30,7 +30,7 @@ function App() {
 
 
   return (
-    <Router forceRefresh={true} history={history}>
+    <Router forceRefresh={true} >
       <Navbar loginStatus={authenticated} logoutHandler={logoutHandler} />
       <div className="App">
         <Switch>
@@ -40,33 +40,43 @@ function App() {
             if (authenticated) {
               return <ProductCreate {...routeProps} />
             } else {
-              <Redirect to="/login" />
+              return <Redirect to="/login" />
             }
-          }}>
+          }} />
 
-          </Route>
+
           <Route path="/productdetail/:id" render={(routeProps) => {
             if (authenticated) {
               return <ProductDetail {...routeProps} />
             } else {
-              <Redirect to="/login" />
+              return <Redirect to="/login" />
             }
-          }}>
+          }} />
 
-          </Route>
-          <Route path="/dashboard" render={(routeProps) => {
-            if (authenticated) {
-              return <Dashboard {...routeProps} />
-            } else {
-              <Redirect to="/login" />
-            }
-          }}>
 
-          </Route>
+          <Route path="/dashboard"
+            render={(routeProps) => {
+              if (authenticated) {
+                return <Dashboard {...routeProps} />
+              } else {
+                return <Redirect to="/login" />
+              }
+            }}
+          />
 
-          <Route path="/" >
-            {!authenticated ? <Redirect to="/login" /> : <Redirect to="/dashboard" />}
-          </Route>
+
+
+          <Route path="/"
+            render={(routeProps) => {
+              if (authenticated) {
+                return <Redirect to="/dashboard" />
+              } else {
+                return <Redirect to="/login" />
+              }
+            }}
+          />
+
+
         </Switch>
       </div>
     </Router>

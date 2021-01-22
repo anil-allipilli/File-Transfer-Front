@@ -3,10 +3,13 @@ import { useHistory } from "react-router-dom";
 
 import api from "../axios"
 import "../style/Login.css"
+
+
 const Login = (props) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [err, setErr] = useState("");
     let history = useHistory();
 
     const loginHandler = async (e) => {
@@ -27,10 +30,8 @@ const Login = (props) => {
             window.localStorage.setItem('access', res.data.access);
             window.localStorage.setItem('refresh', res.data.refresh);
             history.push("/dashboard")
-
-
         } catch (err) {
-            console.log(err)
+            setErr(err.response.data.detail)
         }
 
     }
@@ -59,6 +60,7 @@ const Login = (props) => {
                     onChange={(e) => setPassword(e.target.value)}
                     required></input>
             </label>
+            <div className="ErrorMessage">{err}</div>
 
             <button className="LoginButton" type="submit">Login</button>
         </form>

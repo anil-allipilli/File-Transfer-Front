@@ -1,7 +1,10 @@
 import React from 'react'
-import api from "../axios"
 
+
+import api from "../axios"
 import "../style/ProductDetail.css"
+import refreshToken from "../refreshToken"
+
 
 class ProductDetail extends React.Component {
 
@@ -13,11 +16,10 @@ class ProductDetail extends React.Component {
             product_users: [],
             product_files: []
         }
-
-        console.log(this.props)
-
+        this.getProductDetail = this.getProductDetail.bind(this);
     }
-    async componentDidMount() {
+
+    async getProductDetail() {
         try {
             let token = localStorage.getItem("access")
             // eslint-disable-next-line
@@ -25,30 +27,29 @@ class ProductDetail extends React.Component {
                 `products/${this.props.match.params.id}/`,
                 { headers: { 'Authorization': `Bearer ${token}` } }
             )
-            console.log(res)
             this.setState({
                 owner: res.data.owner,
                 name: res.data.name,
                 product_users: res.data.product_users,
                 product_files: res.data.product_files,
-
             })
-
         } catch (err) {
-            console.log(err)
-            // if(err.response.status === 401) {
-            //     let refresh = await refreshToken()
-            //     if(!refresh) {
-            //         history.push("/login")
-            //     } else {
-            //         fetchdata()
-            //     }
-            // }
+            if (err.response.status === 401) {
+                let refresh = await refreshToken()
+                if (!refresh) {
+                    this.props.history.push("/login")
+                } else {
+                    this.getProductDetail()
+                }
+            }
         }
     }
 
+    async componentDidMount() {
+        this.getProductDetail()
+    }
+
     async downloadFile(fileName) {
-        console.log(fileName)
         try {
             let token = localStorage.getItem("access")
             let res = await api({
@@ -63,23 +64,17 @@ class ProductDetail extends React.Component {
             a.href = url;
             a.download = fileName;
             a.click();
-
-
         } catch (err) {
-            console.log(err)
-            // if(err.response.status === 401) {
-            //     let refresh = await refreshToken()
-            //     if(!refresh) {
-            //         history.push("/login")
-            //     } else {
-            //         fetchdata()
-            //     }
-            // }
+            if (err.response.status === 401) {
+                let refresh = await refreshToken()
+                if (!refresh) {
+                    this.props.history.push("/login")
+                } else {
+                    this.downloadFile(fileName)
+                }
+            }
         }
-
     }
-
-
 
 
     render() {
@@ -90,7 +85,7 @@ class ProductDetail extends React.Component {
                 <div>
                     {this.state.product_files.map((file, i) => {
                         let fileName = file.file.split("/").pop()
-                        console.log(fileName)
+
                         return (
                             <div onClick={() => this.downloadFile(fileName)} key={i}>Filename: {fileName}</div>
                         )
@@ -103,8 +98,6 @@ class ProductDetail extends React.Component {
                         )
                     })}
                 </div>
-
-
             </div>
 
         )
